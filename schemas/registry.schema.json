@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Skills Sync Registry",
+  "type": "object",
+  "required": ["protocol", "profile", "version", "repository", "visibility", "components"],
+  "properties": {
+    "protocol": { "type": "string" },
+    "profile": { "type": "string" },
+    "version": { "type": "string" },
+    "repository": { "type": "string" },
+    "visibility": { "enum": ["public", "private"] },
+    "components": {
+      "type": "object",
+      "required": ["skills", "agents", "plugins", "knowledge", "manifests"],
+      "properties": {
+        "skills": { "type": "array", "items": { "type": "object" } },
+        "agents": { "type": "array", "items": { "type": "object" } },
+        "plugins": { "type": "array", "items": { "type": "object" } },
+        "knowledge": { "type": "array", "items": { "type": "object" } },
+        "manifests": { "type": "array", "items": { "type": "object" } }
+      }
+    }
+  }
+}
