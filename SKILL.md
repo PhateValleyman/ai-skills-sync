@@ -41,3 +41,5 @@ This repository is the portable, GitHub-native source of truth for the user's AI
 5. Changes to this architecture must be reflected in this SKILL.md.
 6. Validate Markdown and JSON before publishing changes.
 7. Keep the core usable by an arbitrary third-party agent that can read GitHub content.
+8. `registry.json` is the machine-readable discovery index; update it whenever registered components are added, removed, renamed, or structurally changed.
+9. Registry entries should point to canonical repository paths and must not require a running service or generated cache.
