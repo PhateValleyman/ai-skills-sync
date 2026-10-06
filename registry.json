@@ -1,11 +1,20 @@
 {
   "protocol": "ai-skills-sync/v1",
   "profile": "PhateValleyman",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": "PhateValleyman/ai-skills-sync",
   "visibility": "public",
   "components": {
-    "skills": [],
+    "skills": [
+      {
+        "id": "global-project-workflow",
+        "version": "1.0.0",
+        "path": "skills/global-project-workflow/SKILL.md",
+        "format": "markdown",
+        "source": "Global_project_workflow.md",
+        "scope": "global"
+      }
+    ],
     "agents": [],
     "plugins": [],
     "knowledge": [],
