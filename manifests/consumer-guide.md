@@ -45,7 +45,11 @@ Do not remove files that are not registered by this profile unless the user expl
 
 When `sha256` is present, calculate SHA-256 over the downloaded bytes and compare it with the registry value before installing the component.
 
-When no checksum is present, the component remains valid but integrity verification is unavailable.
+A strict consumer may require checksums for every registered component and must reject missing or malformed values.
+
+The reference synchronizer supports `--require-checksums` for strict enforcement and `--print-checksums` to calculate the current values for registry maintenance.
+
+When no checksum is present, the component remains loadable in compatibility mode, but integrity verification is unavailable.
 
 ### Credentials
 
