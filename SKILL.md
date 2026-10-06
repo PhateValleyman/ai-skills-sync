@@ -11,6 +11,7 @@ This repository is the portable, GitHub-native source of truth for the user's AI
 - GitLab and local `~/.agents` installations are mirrors/adapters, not required infrastructure.
 - Third-party agents should be able to discover the profile from `registry.json` and load only the components they need.
 - Credentials and secrets must never be stored in this repository.
+- `tools/ai-skills-sync.py` is a dependency-free reference consumer; it is a bootstrap utility, not a managed profile component.
 
 ## Canonical local layout
 
@@ -43,3 +44,7 @@ This repository is the portable, GitHub-native source of truth for the user's AI
 7. Keep the core usable by an arbitrary third-party agent that can read GitHub content.
 8. `registry.json` is the machine-readable discovery index; update it whenever registered components are added, removed, renamed, or structurally changed.
 9. Registry entries should point to canonical repository paths and must not require a running service or generated cache.
+10. The reference synchronizer must validate the v1 protocol and repository identity before installing components.
+11. The reference synchronizer must verify declared `sha256` values when present and must reject unsafe component paths.
+12. Synchronization must preserve unmanaged local files; pruning is never implicit.
+13. Synchronizer state belongs under `~/.agents/manifests/.ai-skills-sync-state.json` and must never contain credentials.
