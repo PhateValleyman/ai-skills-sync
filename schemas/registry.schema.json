@@ -2,22 +2,42 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AI Skills Sync Registry",
   "type": "object",
-  "required": ["protocol", "profile", "version", "repository", "visibility", "components"],
+  "required": ["protocol", "profile", "version", "repository", "visibility", "canonical_root", "components"],
   "properties": {
-    "protocol": { "type": "string" },
-    "profile": { "type": "string" },
-    "version": { "type": "string" },
-    "repository": { "type": "string" },
-    "visibility": { "enum": ["public", "private"] },
+    "protocol": {"const": "ai-skills-sync/v1"},
+    "profile": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+    "visibility": {"enum": ["public", "private"]},
+    "canonical_root": {"const": "~/.agents"},
     "components": {
       "type": "object",
       "required": ["skills", "agents", "plugins", "knowledge", "manifests"],
+      "additionalProperties": false,
       "properties": {
-        "skills": { "type": "array", "items": { "type": "object" } },
-        "agents": { "type": "array", "items": { "type": "object" } },
-        "plugins": { "type": "array", "items": { "type": "object" } },
-        "knowledge": { "type": "array", "items": { "type": "object" } },
-        "manifests": { "type": "array", "items": { "type": "object" } }
+        "skills": {"$ref": "#/$defs/components"},
+        "agents": {"$ref": "#/$defs/components"},
+        "plugins": {"$ref": "#/$defs/components"},
+        "knowledge": {"$ref": "#/$defs/components"},
+        "manifests": {"$ref": "#/$defs/components"}
+      }
+    }
+  },
+  "$defs": {
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "format", "scope"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "pattern": "^(skills|agents|plugins|knowledge|manifests)/.+$"},
+          "format": {"type": "string", "minLength": 1},
+          "scope": {"type": "string", "minLength": 1},
+          "version": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"}
+        },
+        "additionalProperties": false
       }
     }
   }
