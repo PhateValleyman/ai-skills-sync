@@ -1,0 +1,15 @@
+{
+  "protocol": "ai-skills-sync/v1",
+  "profile": "PhateValleyman",
+  "version": "0.1.0",
+  "repository": "PhateValleyman/ai-skills-sync",
+  "canonical_local_root": "~/.agents",
+  "capabilities": [
+    "skills",
+    "agents",
+    "plugins",
+    "knowledge",
+    "manifests"
+  ],
+  "requires": []
+}
