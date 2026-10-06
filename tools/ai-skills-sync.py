@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Portable ai-skills-sync/v1 consumer.
 
-Dependency-free GitHub-native synchronizer. It only reads the profile repository,
-verifies the declared protocol/repository identity, optionally verifies SHA-256,
+Dependency-free GitHub-native synchronizer. It reads the profile repository,
+validates protocol/repository identity, verifies optional SHA-256 checksums,
 and mirrors registered components below ~/.agents.
 """
 
@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -20,6 +21,8 @@ PROTOCOL = "ai-skills-sync/v1"
 DEFAULT_REPOSITORY = "PhateValleyman/ai-skills-sync"
 DEFAULT_ROOT = Path("~/.agents").expanduser()
 STATE_NAME = ".ai-skills-sync-state.json"
+REF_RE = re.compile(r"^[A-Za-z0-9._/-]+$")
+REPOSITORY_RE = re.compile(r"^[^/]+/[^/]+$")
 
 
 def die(message: str) -> "None":
@@ -31,7 +34,7 @@ def fetch(base: str, path: str, ref: str) -> bytes:
     url = f"{base.rstrip('/')}/{path}?ref={ref}"
     request = urllib.request.Request(
         url,
-        headers={"User-Agent": "ai-skills-sync/1.0"},
+        headers={"User-Agent": "ai-skills-sync/1.1"},
     )
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
@@ -61,18 +64,24 @@ def validate(registry: dict, profile: dict, repository: str) -> None:
         die("registry repository does not match requested repository")
     if profile.get("repository") != repository:
         die("profile repository does not match requested repository")
+    if registry.get("version") != profile.get("version"):
+        die("registry/profile version mismatch")
     if registry.get("canonical_root") != "~/.agents":
         die("unsupported canonical root")
     if profile.get("canonical_local_root") != "~/.agents":
         die("unsupported profile root")
 
 
-def component_list(registry: dict, categories: list[str], selected: set[str] | None) -> list[dict]:
+def component_list(
+    registry: dict,
+    categories: list[str],
+    selected: set[str] | None,
+) -> list[tuple[str, dict]]:
     components = registry.get("components")
     if not isinstance(components, dict):
         die("registry.components must be an object")
 
-    result = []
+    result: list[tuple[str, dict]] = []
     for category in categories:
         entries = components.get(category, [])
         if not isinstance(entries, list):
@@ -82,8 +91,10 @@ def component_list(registry: dict, categories: list[str], selected: set[str] | N
                 die(f"invalid component entry in {category}")
             item_id = entry.get("id")
             path = entry.get("path")
-            if not isinstance(item_id, str) or not isinstance(path, str):
-                die(f"component in {category} requires string id/path")
+            fmt = entry.get("format")
+            scope = entry.get("scope")
+            if not all(isinstance(value, str) and value for value in (item_id, path, fmt, scope)):
+                die(f"component in {category} requires non-empty id/path/format/scope")
             if selected is None or f"{category}:{item_id}" in selected or item_id in selected:
                 result.append((category, entry))
     if selected is not None and not result:
@@ -113,10 +124,24 @@ def main() -> int:
     )
     parser.add_argument("--component", action="append", dest="components")
     parser.add_argument("--check-only", action="store_true")
+    parser.add_argument(
+        "--require-checksums",
+        action="store_true",
+        help="Reject registry entries that do not declare sha256.",
+    )
+    parser.add_argument(
+        "--print-checksums",
+        action="store_true",
+        help="Print calculated SHA-256 values without modifying the destination.",
+    )
     args = parser.parse_args()
 
-    if "/" not in args.repository:
+    if not REPOSITORY_RE.fullmatch(args.repository):
         die("repository must be owner/name")
+    if not REF_RE.fullmatch(args.ref) or args.ref.startswith(("/", ".", "-")):
+        die("unsafe ref")
+    if args.check_only and args.print_checksums:
+        die("--check-only and --print-checksums are mutually exclusive")
 
     categories = args.category or ["skills", "agents", "plugins", "knowledge", "manifests"]
     selected = set(args.components) if args.components else None
@@ -142,7 +167,13 @@ def main() -> int:
 
         expected = entry.get("sha256")
         actual = hashlib.sha256(data).hexdigest()
-        if expected is not None and expected.lower() != actual:
+        if args.require_checksums and not expected:
+            die(f"missing sha256 for {repo_path}")
+        if expected is not None and (
+            not isinstance(expected, str) or
+            not re.fullmatch(r"[0-9a-fA-F]{64}", expected) or
+            expected.lower() != actual
+        ):
             die(f"sha256 mismatch for {repo_path}")
 
         state["components"][f"{category}:{entry['id']}"] = {
@@ -150,6 +181,10 @@ def main() -> int:
             "sha256": actual,
             "version": entry.get("version"),
         }
+
+        if args.print_checksums:
+            print(f"{actual}  {repo_path}")
+            continue
 
         if args.check_only:
             print(f"OK: {repo_path}")
@@ -159,7 +194,7 @@ def main() -> int:
         target.write_bytes(data)
         print(f"OK: {target}")
 
-    if not args.check_only:
+    if not args.check_only and not args.print_checksums:
         args.destination.mkdir(parents=True, exist_ok=True)
         state_path = args.destination / "manifests" / STATE_NAME
         state_path.parent.mkdir(parents=True, exist_ok=True)
@@ -169,7 +204,7 @@ def main() -> int:
         )
         print(f"OK: state {state_path}")
 
-    print(f"OK: synchronized {len(entries)} component(s)")
+    print(f"OK: processed {len(entries)} component(s)")
     return 0
 
 
