@@ -1,23 +1,443 @@
 {
   "protocol": "ai-skills-sync/v1",
   "profile": "PhateValleyman",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "repository": "PhateValleyman/ai-skills-sync",
   "visibility": "public",
+  "canonical_root": "~/.agents",
   "components": {
     "skills": [
       {
+        "id": "agent-md-refactor",
+        "path": "skills/agent-md-refactor/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "agent-reach",
+        "path": "skills/agent-reach/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "android-development",
+        "path": "skills/android-development/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "appium-skill",
+        "path": "skills/appium-skill/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "automation-and-scheduling",
+        "path": "skills/automation-and-scheduling/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "builtin-llm-models",
+        "path": "skills/builtin-llm-models/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "chrome-devtools",
+        "path": "skills/chrome-devtools/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "ci-cd-and-automation",
+        "path": "skills/ci-cd-and-automation/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "claude-md-improver",
+        "path": "skills/claude-md-improver/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "crafting-effective-readmes",
+        "path": "skills/crafting-effective-readmes/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "data-analysis",
+        "path": "skills/data-analysis/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "data-api",
+        "path": "skills/data-api/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "data-backup-restoration",
+        "path": "skills/data-backup-restoration/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "debugging-and-error-recovery",
+        "path": "skills/debugging-and-error-recovery/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "deep-research",
+        "path": "skills/deep-research/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "dependency-updater",
+        "path": "skills/dependency-updater/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "espresso-skill",
+        "path": "skills/espresso-skill/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "example-skill",
+        "path": "skills/example-skill/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "excel-generator",
+        "path": "skills/excel-generator/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "favicon-gen",
+        "path": "skills/favicon-gen/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "finance-pro-playbooks",
+        "path": "skills/finance-pro-playbooks/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "find-skills",
+        "path": "skills/find-skills/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "finishing-a-development-branch",
+        "path": "skills/finishing-a-development-branch/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "game-asset-catalog",
+        "path": "skills/game-asset-catalog/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "gemini-api",
+        "path": "skills/gemini-api/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "gemini-live-api-dev",
+        "path": "skills/gemini-live-api-dev/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "git-workflow-and-versioning",
+        "path": "skills/git-workflow-and-versioning/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "github-gem-seeker",
+        "path": "skills/github-gem-seeker/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
         "id": "global-project-workflow",
-        "version": "1.0.0",
         "path": "skills/global-project-workflow/SKILL.md",
         "format": "markdown",
-        "source": "Global_project_workflow.md",
+        "scope": "global"
+      },
+      {
+        "id": "gws-best-practices",
+        "path": "skills/gws-best-practices/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "handoff",
+        "path": "skills/handoff/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "image-processing",
+        "path": "skills/image-processing/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "imagegen",
+        "path": "skills/imagegen/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "internet-skill-finder",
+        "path": "skills/internet-skill-finder/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "manus-api",
+        "path": "skills/manus-api/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "manus-config",
+        "path": "skills/manus-config/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "manus-tasks",
+        "path": "skills/manus-tasks/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "markdown-mermaid-writing",
+        "path": "skills/markdown-mermaid-writing/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "markdown-to-html",
+        "path": "skills/markdown-to-html/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "mcp-cli",
+        "path": "skills/mcp-cli/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "memory-management",
+        "path": "skills/memory-management/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "minecraft-plugin-development",
+        "path": "skills/minecraft-plugin-development/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "muapi-3d-logo-animation",
+        "path": "skills/muapi-3d-logo-animation/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "music-prompter",
+        "path": "skills/music-prompter/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "office-documents",
+        "path": "skills/office-documents/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "office",
+        "path": "skills/office/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "persistent-computing",
+        "path": "skills/persistent-computing/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "playground",
+        "path": "skills/playground/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "pnpm-upgrade",
+        "path": "skills/pnpm-upgrade/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "professional-communication",
+        "path": "skills/professional-communication/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "prompt-engineer",
+        "path": "skills/prompt-engineer/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "push-to-github",
+        "path": "skills/push-to-github/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "read-special-images",
+        "path": "skills/read-special-images/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "redmi",
+        "path": "skills/redmi/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "skill-creator",
+        "path": "skills/skill-creator/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "slides",
+        "path": "skills/slides/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "triggers",
+        "path": "skills/triggers/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "trip",
+        "path": "skills/trip/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "tts-prompter",
+        "path": "skills/tts-prompter/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "typst-pdf-maker",
+        "path": "skills/typst-pdf-maker/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "video-generation",
+        "path": "skills/video-generation/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "webdev-seo",
+        "path": "skills/webdev-seo/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "webdev-worklocally",
+        "path": "skills/webdev-worklocally/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "webdev",
+        "path": "skills/webdev/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "webdev/seo",
+        "path": "skills/webdev/seo/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "webdev/worklocally",
+        "path": "skills/webdev/worklocally/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "workflow-composer",
+        "path": "skills/workflow-composer/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "writing-skills",
+        "path": "skills/writing-skills/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "youtube-video-research",
+        "path": "skills/youtube-video-research/SKILL.md",
+        "format": "markdown",
+        "scope": "global"
+      },
+      {
+        "id": "zyxel",
+        "path": "skills/zyxel/SKILL.md",
+        "format": "markdown",
         "scope": "global"
       }
     ],
     "agents": [],
     "plugins": [],
     "knowledge": [],
-    "manifests": []
+    "manifests": [
+      {
+        "id": "imports",
+        "path": "manifests/imports.md",
+        "format": "markdown",
+        "scope": "global"
+      }
+    ]
   }
 }
