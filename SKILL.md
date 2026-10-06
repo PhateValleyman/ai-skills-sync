@@ -48,3 +48,4 @@ This repository is the portable, GitHub-native source of truth for the user's AI
 11. The reference synchronizer must verify declared `sha256` values when present and must reject unsafe component paths.
 12. Synchronization must preserve unmanaged local files; pruning is never implicit.
 13. Synchronizer state belongs under `~/.agents/manifests/.ai-skills-sync-state.json` and must never contain credentials.
+\n\n## Integrity maintenance\n\n- Registered components may declare SHA-256 checksums in `registry.json`; consumers must verify declared checksums before installation.\n- The reference synchronizer supports strict checksum enforcement with `--require-checksums` and checksum generation with `--print-checksums`.\n- Never fabricate checksum values. Registry checksums must be calculated from the exact downloaded component bytes.\n- Registry/profile versions must remain synchronized.\n- Repository and ref inputs are validated before remote content is fetched.\n
